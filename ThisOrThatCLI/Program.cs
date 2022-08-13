@@ -9,12 +9,27 @@ namespace ThisOrThatCLI
 {
     public class Program
     {
+        public static void DisplayHelp()
+        {
+            Console.WriteLine("=======================Help Menu========================");
+            Console.WriteLine("h: Display Help Menu");
+            Console.WriteLine("l: Display All Movies in Database");
+            Console.WriteLine("d: Delete a Movie from Database");
+            Console.WriteLine("i: Insert a New Movie into Database");
+            Console.WriteLine("u: Update a Movie in the Database");
+            Console.WriteLine("q: Quit the Application");
+        }
+
         public static MovieCollection DeleteMovie(MovieCollection movies)
         {
-            Console.WriteLine("What is the name of the movie you would like to delete?");
+            Console.WriteLine("=======================Delete a Movie========================");
+            Console.WriteLine("What is the name of the movie you would like to delete (enter exit to cancel)?");
             Console.Write("> ");
 
             string userInput = Console.ReadLine();
+
+            if (userInput.Equals("exit"))
+                return movies;
 
             Movie movie = movies.Find(i => i.Title == userInput);
             
@@ -55,7 +70,7 @@ namespace ThisOrThatCLI
                 switch(input)
                 {
                     case "h":
-                        //display help menu
+                        DisplayHelp();
                         break;
                     case "l":
                         DisplayAllMovies(dbFile.Movies);
