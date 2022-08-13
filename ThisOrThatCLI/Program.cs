@@ -9,6 +9,56 @@ namespace ThisOrThatCLI
 {
     public class Program
     {
+
+        public static DatabaseFile UpdateMovie(DatabaseFile db)
+        {
+            Console.WriteLine("=======================Update a Movie========================");
+            Console.WriteLine("What movie do you want to update (enter exit to cancel)?");
+            Console.Write("> ");
+
+            string userInput = Console.ReadLine();
+
+            if (userInput.Equals("exit"))
+            {
+
+            }
+            else
+            {
+                Movie movie = db.FindMovieFromTitle(userInput);
+
+                if(movie == null)
+                {
+                    Console.WriteLine($"Could not find the movie named {userInput}!");
+                }
+                else
+                {
+                    Console.WriteLine($"Movie, {movie.Title}, was found!");
+                    Console.WriteLine("What property would you like to update?");
+                    Console.WriteLine("What property would you like to update?");
+                    Console.WriteLine("\t1. Title");
+                    Console.WriteLine("\t2. Elo");
+
+                    userInput = Console.ReadLine();
+
+                    if (userInput.Equals("1"))
+                    {
+
+                    }
+                    else if(userInput.Equals("2"))
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+
+                    
+
+                }
+            }
+        }
+
         public static void DisplayHelp()
         {
             Console.WriteLine("=======================Help Menu========================");
@@ -20,7 +70,7 @@ namespace ThisOrThatCLI
             Console.WriteLine("q: Quit the Application");
         }
 
-        public static MovieCollection DeleteMovie(MovieCollection movies)
+        public static DatabaseFile DeleteMovie(DatabaseFile db)
         {
             Console.WriteLine("=======================Delete a Movie========================");
             Console.WriteLine("What is the name of the movie you would like to delete (enter exit to cancel)?");
@@ -29,9 +79,9 @@ namespace ThisOrThatCLI
             string userInput = Console.ReadLine();
 
             if (userInput.Equals("exit"))
-                return movies;
+                return db;
 
-            Movie movie = movies.Find(i => i.Title == userInput);
+            Movie movie = db.FindMovieFromTitle(userInput);
             
             if(movie == null)
             {
@@ -39,11 +89,11 @@ namespace ThisOrThatCLI
             }
             else
             {
-                movies.Remove(movie);
+                db.RemoveMovie(movie);
                 Console.WriteLine("Movie Deleted!");
             }
 
-            return movies;
+            return db;
         }
 
         public static void DisplayAllMovies(MovieCollection movies)
@@ -76,7 +126,7 @@ namespace ThisOrThatCLI
                         DisplayAllMovies(dbFile.Movies);
                         break;
                     case "d":
-                        dbFile.Movies = DeleteMovie(dbFile.Movies);
+                        dbFile = DeleteMovie(dbFile);
                         dbFile.Update();
                         break;
                     case "i":

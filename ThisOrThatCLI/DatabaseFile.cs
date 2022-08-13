@@ -20,6 +20,21 @@ namespace ThisOrThatCLI
             Parse(fileName);
         }
 
+        public Movie FindMovieFromTitle(string title)
+        {
+            return this.Movies.Find(i => i.Title.Equals(title));
+        }
+
+        public void RemoveMovie(Movie movie)
+        {
+            this.Movies.Remove(movie);
+        }
+
+        public void RemoveMovie(int index)
+        {
+            this.Movies.RemoveAt(index);
+        }
+
         public void Parse(string fileName)
         {
             try
