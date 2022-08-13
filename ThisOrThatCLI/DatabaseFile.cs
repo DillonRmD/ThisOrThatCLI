@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace ThisOrThatCLI
         public string Contents { get; set; }
         public string Name { get; set; }
 
+        public FileInfo fileInformation { get => new FileInfo(Name); }
         public MovieCollection Movies { get; set;}
 
         public DatabaseFile(string fileName)
@@ -29,6 +31,19 @@ namespace ThisOrThatCLI
             catch(Exception e)
             {
                 // do some thing
+            }
+        }
+
+        public void Update()
+        {
+            try
+            {
+                string serializedContent = Newtonsoft.Json.JsonConvert.SerializeObject(Movies);
+                File.WriteAllText(fileInformation.FullName, Contents);
+            }
+            catch(Exception e)
+            {
+
             }
         }
     }
